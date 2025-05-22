@@ -1,15 +1,20 @@
 import dotenv from "dotenv";
 dotenv.config();
-
+import path from "node:path";
 import express, { Request, Response } from "express";
 import cors from "cors";
 import morgan from "morgan";
-import path from "node:path";
+import compression from "compression";
 
 const app = express();
 app.use(cors()); // allow all origin
 app.use(morgan("dev"));
 app.use(express.json({ limit: "50mb" }));
+app.use(
+  compression({
+    level: 6,
+  })
+);
 
 // http://localhost:4000/api
 app.use("/api", (_req: Request, res: Response) => {
