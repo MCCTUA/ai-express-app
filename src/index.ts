@@ -6,6 +6,7 @@ import cors from "cors";
 import morgan from "morgan";
 import compression from "compression";
 import { errorHandler } from "./middlewares/error-handler";
+import homeRouter from "./routes/home-route"
 import authRouter from "./routes/auth-route"
 
 const app = express();
@@ -19,11 +20,8 @@ app.use(
   })
 );
 
-// เขียนแบบ global error handler แบบ Express V5.
 // http://localhost:4000/api/
-// app.use("/api", (_req: Request, res: Response, next: NextFunction) => {
-//   res.status(200).json({ message: "Express.js V5 API" });
-// });
+app.use("/api", homeRouter);
 
 // http://localhost:4000/api/auth
 app.use("/api/auth", authRouter)
